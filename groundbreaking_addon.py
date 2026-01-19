@@ -47,6 +47,64 @@ class GroundbreakingProps(PropertyGroup):
 
     animation_smooth_factor: FloatProperty(name="Smooth Factor", default=0.5, min=0.0, max=1.0)
 
+    # Smart City Properties
+    city_blocks: IntProperty(name="City Blocks", default=10, min=1, max=50)
+    road_width: FloatProperty(name="Road Width", default=8.0, min=2.0, max=20.0)
+    building_density: FloatProperty(name="Building Density", default=0.7, min=0.1, max=1.0)
+
+    # AI Terrain Analysis
+    terrain_analysis_mode: EnumProperty(
+        name="Analysis Mode",
+        items=[
+            ('OPTIMIZE', "Optimize", "Optimize terrain for performance"),
+            ('REALISTIC', "Realistic", "Enhance terrain realism"),
+            ('GAME_READY', "Game Ready", "Prepare terrain for game engines"),
+        ],
+        default='OPTIMIZE'
+    )
+
+    # Neural Material Synthesis
+    material_complexity: IntProperty(name="Complexity", default=3, min=1, max=10)
+    material_resolution: IntProperty(name="Resolution", default=1024, min=256, max=4096)
+
+    # Physics Destruction
+    destruction_force: FloatProperty(name="Destruction Force", default=100.0, min=1.0, max=1000.0)
+    fracture_count: IntProperty(name="Fracture Count", default=10, min=1, max=100)
+
+    # Advanced Vegetation
+    ecosystem_type: EnumProperty(
+        name="Ecosystem Type",
+        items=[
+            ('FOREST', "Forest", "Dense forest ecosystem"),
+            ('GRASSLAND', "Grassland", "Open grassland"),
+            ('DESERT', "Desert", "Arid desert environment"),
+            ('TUNDRA', "Tundra", "Cold tundra biome"),
+        ],
+        default='FOREST'
+    )
+    growth_cycles: IntProperty(name="Growth Cycles", default=5, min=1, max=20)
+
+    # Procedural Animation
+    motion_complexity: IntProperty(name="Motion Complexity", default=3, min=1, max=10)
+    animation_duration: FloatProperty(name="Duration", default=2.0, min=0.1, max=10.0)
+
+    # Weather System
+    weather_type: EnumProperty(
+        name="Weather Type",
+        items=[
+            ('SUNNY', "Sunny", "Clear sunny weather"),
+            ('RAINY', "Rainy", "Heavy rain"),
+            ('SNOWY', "Snowy", "Snowfall"),
+            ('FOGGY', "Foggy", "Dense fog"),
+        ],
+        default='SUNNY'
+    )
+    weather_intensity: FloatProperty(name="Intensity", default=0.5, min=0.0, max=1.0)
+
+    # VR/AR Features
+    vr_mode: BoolProperty(name="VR Mode", default=False)
+    ar_markers: BoolProperty(name="AR Markers", default=False)
+
 # Noise Function for Terrain
 def noise(x, y, octaves=4, scale=0.1):
     value = 0.0
@@ -328,6 +386,62 @@ class VIEW3D_PT_groundbreaking_panel(Panel):
         box.prop(props, "animation_smooth_factor")
         box.operator("object.optimize_animation")
 
+        # Smart City Section
+        box = layout.box()
+        box.label(text="Smart City Generator")
+        box.prop(props, "city_blocks")
+        box.prop(props, "road_width")
+        box.prop(props, "building_density")
+        box.operator("object.generate_city")
+
+        # AI Terrain Analysis Section
+        box = layout.box()
+        box.label(text="AI Terrain Analysis")
+        box.prop(props, "terrain_analysis_mode")
+        box.operator("object.analyze_terrain")
+
+        # Neural Material Synthesis Section
+        box = layout.box()
+        box.label(text="Neural Material Synthesis")
+        box.prop(props, "material_complexity")
+        box.prop(props, "material_resolution")
+        box.operator("object.synthesize_material")
+
+        # Physics Destruction Section
+        box = layout.box()
+        box.label(text="Physics Destruction")
+        box.prop(props, "destruction_force")
+        box.prop(props, "fracture_count")
+        box.operator("object.physics_destruction")
+
+        # Advanced Vegetation Section
+        box = layout.box()
+        box.label(text="Advanced Vegetation Ecosystem")
+        box.prop(props, "ecosystem_type")
+        box.prop(props, "growth_cycles")
+        box.operator("object.advanced_vegetation")
+
+        # Procedural Animation Section
+        box = layout.box()
+        box.label(text="Procedural Animation")
+        box.prop(props, "motion_complexity")
+        box.prop(props, "animation_duration")
+        box.operator("object.procedural_animation")
+
+        # Weather System Section
+        box = layout.box()
+        box.label(text="Weather System")
+        box.prop(props, "weather_type")
+        box.prop(props, "weather_intensity")
+        box.operator("object.weather_system")
+
+        # VR/AR Section
+        box = layout.box()
+        box.label(text="VR/AR Features")
+        box.prop(props, "vr_mode")
+        box.prop(props, "ar_markers")
+        box.operator("object.vr_ar_setup")
+
 # Registration
 classes = (
     GroundbreakingProps,
@@ -336,6 +450,14 @@ classes = (
     OBJECT_OT_generate_vegetation,
     OBJECT_OT_generate_material,
     OBJECT_OT_optimize_animation,
+    OBJECT_OT_generate_city,
+    OBJECT_OT_analyze_terrain,
+    OBJECT_OT_synthesize_material,
+    OBJECT_OT_physics_destruction,
+    OBJECT_OT_advanced_vegetation,
+    OBJECT_OT_procedural_animation,
+    OBJECT_OT_weather_system,
+    OBJECT_OT_vr_ar_setup,
     VIEW3D_PT_groundbreaking_panel,
 )
 
