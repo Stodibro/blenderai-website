@@ -4,6 +4,9 @@ import math
 import random
 import time
 import threading
+import json
+import urllib.request
+import urllib.error
 from mathutils import Vector, Matrix, Euler, Quaternion
 from bpy.props import FloatProperty, IntProperty, BoolProperty, EnumProperty, StringProperty, FloatVectorProperty
 from bpy.types import Operator, Panel, PropertyGroup, NodeTree, Node, NodeSocket
